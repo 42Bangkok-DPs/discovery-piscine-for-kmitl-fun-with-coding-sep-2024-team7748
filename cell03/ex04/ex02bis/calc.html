@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+        }
+
+        .calculator {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            width: 280px;
+            text-align: center;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        input[type="text"], select, button {
+            display: block;
+            margin-bottom: 10px;
+            padding: 12px;
+            width: 100%;
+            box-sizing: border-box;
+            font-size: 16px;
+            border: 2px solid #333;
+            border-radius: 0px;
+            background-color: #fff;
+        }
+
+        button {
+            background-color: #000;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none;
+        }
+
+        button:hover {
+            background-color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input id="leftOperand" type="text" min="0" placeholder="Input a number">
+        <select id="operator">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+            <option value="%">%</option>
+        </select>
+        <input id="rightOperand" type="text" min="0" placeholder="Input a number">
+        <button id="calculateBtn">Try me!</button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#calculateBtn').on('click', function() {
+                const left = parseFloat($('#leftOperand').val());
+                const operator = $('#operator').val();
+                const right = parseFloat($('#rightOperand').val());
+
+                if (isNaN(left) || isNaN(right) || left < 0 || right < 0) {
+                    alert('Error :(');
+                    return;
+                }
+
+                if ((left === 0 || right === 0) && (operator === '/' || operator === '%')) {
+                    alert("It's over 9000!");
+                    return;
+                }
+
+                let result;
+                switch (operator) {
+                    case '+':
+                        result = left + right;
+                        break;
+                    case '-':
+                        result = left - right;
+                        break;
+                    case '*':
+                        result = left * right;
+                        break;
+                    case '/':
+                        result = left / right;
+                        break;
+                    case '%':
+                        result = left % right;
+                        break;
+                }
+
+                alert('Result: ' + result);
+            });
+
+            setInterval(function() {
+                alert('Please, use me...');
+            }, 30000);
+        });
+    </script>
+</body>
+</html>
